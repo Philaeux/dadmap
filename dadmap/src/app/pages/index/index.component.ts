@@ -1,6 +1,14 @@
 import { Component, ElementRef, HostListener, ViewChild } from '@angular/core'
 
 import { CommonModule } from '@angular/common'
+import { DisplayFlags, Map, MapInfo } from '../../models'
+import { Crypt_01 } from '../../maps/Crypt_01'
+import { Crypt_02 } from '../../maps/Crypt_02'
+import { GoblinCave_01 } from '../../maps/GoblinCave_01'
+import { IceAbyss_01 } from '../../maps/IceAbyss_01'
+import { IceCave_01 } from '../../maps/IceCave_01'
+import { Inferno_01 } from '../../maps/Inferno_01'
+import { Inferno_02 } from '../../maps/Inferno_02'
 
 
 @Component({
@@ -43,19 +51,41 @@ export class IndexComponent {
 
   // Selected map
   selectedMap: string = "Crypt_01"
+  // All map info
+  maps: MapInfo = {
+    "Crypt_01": Crypt_01,
+    "Crypt_02": Crypt_02,
+    "Inferno_01": Inferno_01,
+    "Inferno_02": Inferno_02,
+    "GoblinCave_01": GoblinCave_01,
+    "IceCave_01": IceCave_01,
+    "IceAbyss_01": IceAbyss_01,
+  }
   // Flag to display cursor coordinates
   displayCoordinates: boolean = false
+  // Flag to display spawns
+  displaySpawns: boolean = true
+  // Flag to display respawns
+  displayRespawns: boolean = false
 
   ngOnInit() {
     this.context = this.canvas!.nativeElement.getContext('2d')!
+
     this.loadImages()
   }
 
   loadImages() {
-    for (let mapName of ["Crypt_01", "Crypt_02", "Inferno_01", "Inferno_02", "IceCave_01", "IceAbyss_01", "GoblinCave_01"]) {
+    for (const mapName in this.maps) {
       this.imageBank[mapName] = new Image()
       this.imageBank[mapName].src = mapName + '.webp'
       this.imageBank[mapName].onload = () => {
+        this.draw()
+      }
+    }
+    for (const iconName of ["spawns", "respawns"]) {
+      this.imageBank[iconName] = new Image()
+      this.imageBank[iconName].src = iconName + '.png'
+      this.imageBank[iconName].onload = () => {
         this.draw()
       }
     }
@@ -85,6 +115,23 @@ export class IndexComponent {
 
     // Restore
     this.context.restore()
+
+    // Draw Elements
+    if (this.displaySpawns) {
+      for (let spawn of this.maps[this.selectedMap].spawns) {
+        const img = new Image()
+        img.src = this.imageBank["spawns"].src
+        this.context.drawImage(img, (spawn.x + this.offsetX) * this.scale - img.width / 2, (spawn.y + this.offsetY) * this.scale - img.height)
+      }
+    }
+    if (this.displayRespawns) {
+      for (let respawn of this.maps[this.selectedMap].respawns) {
+        const img = new Image()
+        img.src = this.imageBank["respawns"].src
+        this.context.drawImage(img, (respawn.x + this.offsetX) * this.scale - img.width / 2, (respawn.y + this.offsetY) * this.scale - img.height)
+      }
+    }
+
 
     // Draw coordinates
     if (this.displayCoordinates) {
@@ -157,10 +204,14 @@ export class IndexComponent {
 
   @HostListener('window:keydown', ['$event'])
   onKeyDown(event: KeyboardEvent) {
-    console.log(event)
     if (["P", "p"].includes(event.key)) {
       this.displayCoordinates = !this.displayCoordinates
+    } else if (["S", "s"].includes(event.key)) {
+      this.displaySpawns = !this.displaySpawns
+    } else if (["R", "r"].includes(event.key)) {
+      this.displayRespawns = !this.displayRespawns
     } else if (["&", "1"].includes(event.key)) {
+      // Load crypt or variant
       if (this.selectedMap == "Crypt_01") {
         this.selectedMap = "Crypt_02"
       } else {
@@ -170,6 +221,7 @@ export class IndexComponent {
       this.offsetY = -20
       this.scale = 0.45
     } else if (["é", "2"].includes(event.key)) {
+      // Load inferno or variant
       if (this.selectedMap == "Inferno_01") {
         this.selectedMap = "Inferno_02"
       } else {
@@ -179,29 +231,25 @@ export class IndexComponent {
       this.offsetY = 50
       this.scale = 0.8
     } else if (["\"", "3"].includes(event.key)) {
+      // Load goblin
       this.selectedMap = "GoblinCave_01"
       this.offsetX = 960
       this.offsetY = -20
       this.scale = 0.45
     } else if (["(", "5"].includes(event.key)) {
+      // Load ice
       this.selectedMap = "IceCave_01"
       this.offsetX = 960
       this.offsetY = -20
       this.scale = 0.45
     } else if (["-", "6"].includes(event.key)) {
+      // Load Abyss
       this.selectedMap = "IceAbyss_01"
       this.offsetX = 600
       this.offsetY = 50
       this.scale = 0.8
-    } else if (event.key == "ArrowRight") {
-      this.offsetX += 100
-    } else if (event.key == "ArrowLeft") {
-      this.offsetX -= 100
-    } else if (event.key == "ArrowUp") {
-      this.offsetY -= 100
-    } else if (event.key == "ArrowDown") {
-      this.offsetY += 100
     }
+
     this.draw()
   }
 }
