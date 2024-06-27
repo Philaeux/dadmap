@@ -1,7 +1,7 @@
 import { Component, ElementRef, HostListener, ViewChild } from '@angular/core'
 
 import { CommonModule } from '@angular/common'
-import { DisplayFlags, Map, MapInfo } from '../../models'
+import { Map, MapInfo } from '../../models'
 import { Crypt_01 } from '../../maps/Crypt_01'
 import { Crypt_02 } from '../../maps/Crypt_02'
 import { GoblinCave_01 } from '../../maps/GoblinCave_01'

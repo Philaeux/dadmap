@@ -12,7 +12,3 @@ export interface Position {
 export interface MapInfo {
     [key: string]: Map
 }
-
-export interface DisplayFlags {
-    [key: string]: boolean
-}
