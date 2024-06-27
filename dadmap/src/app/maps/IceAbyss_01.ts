@@ -5,5 +5,9 @@ export const IceAbyss_01: Map = {
     respawns: [
     ],
     spawns: [
+        {
+            x: 481,
+            y: 930
+        }
     ]
 }

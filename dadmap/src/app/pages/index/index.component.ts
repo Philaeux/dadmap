@@ -66,7 +66,7 @@ export class IndexComponent {
   // Flag to display spawns
   displaySpawns: boolean = true
   // Flag to display respawns
-  displayRespawns: boolean = false
+  displayRespawns: boolean = true
 
   ngOnInit() {
     this.context = this.canvas!.nativeElement.getContext('2d')!

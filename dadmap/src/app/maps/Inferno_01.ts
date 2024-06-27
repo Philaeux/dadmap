@@ -5,5 +5,9 @@ export const Inferno_01: Map = {
     respawns: [
     ],
     spawns: [
+        {
+            x: 925,
+            y: 925
+        }
     ]
 }
