@@ -63,10 +63,10 @@ export class IndexComponent {
   }
   // Flag to display cursor coordinates
   displayCoordinates: boolean = false
-  // Flag to display spawns
-  displaySpawns: boolean = true
-  // Flag to display respawns
-  displayRespawns: boolean = true
+  displayFlags = {
+    "spawns": true,
+    "respawns": true
+  }
 
   ngOnInit() {
     this.context = this.canvas!.nativeElement.getContext('2d')!
@@ -76,18 +76,18 @@ export class IndexComponent {
 
   loadImages() {
     for (const mapName in this.maps) {
-      this.imageBank[mapName] = new Image()
-      this.imageBank[mapName].src = mapName + '.webp'
-      this.imageBank[mapName].onload = () => {
-        this.draw()
-      }
+      this.loadImage(mapName, ".webp")
     }
-    for (const iconName of ["spawns", "respawns"]) {
-      this.imageBank[iconName] = new Image()
-      this.imageBank[iconName].src = iconName + '.png'
-      this.imageBank[iconName].onload = () => {
-        this.draw()
-      }
+    for (const iconName in this.displayFlags) {
+      this.loadImage(iconName, ".png")
+    }
+  }
+
+  loadImage(iconName: string, ext: string) {
+    this.imageBank[iconName] = new Image()
+    this.imageBank[iconName].src = iconName + ext
+    this.imageBank[iconName].onload = () => {
+      this.draw()
     }
   }
 
@@ -117,21 +117,16 @@ export class IndexComponent {
     this.context.restore()
 
     // Draw Elements
-    if (this.displaySpawns) {
-      for (let spawn of this.maps[this.selectedMap].spawns) {
+    for (const category of Object.keys(this.maps[this.selectedMap]) as (keyof Map)[]) {
+      if (category == "name") continue
+      if (!this.displayFlags[category]) continue
+
+      for (let spawn of this.maps[this.selectedMap][category]) {
         const img = new Image()
-        img.src = this.imageBank["spawns"].src
+        img.src = this.imageBank[category].src
         this.context.drawImage(img, (spawn.x + this.offsetX) * this.scale - img.width / 2, (spawn.y + this.offsetY) * this.scale - img.height)
       }
     }
-    if (this.displayRespawns) {
-      for (let respawn of this.maps[this.selectedMap].respawns) {
-        const img = new Image()
-        img.src = this.imageBank["respawns"].src
-        this.context.drawImage(img, (respawn.x + this.offsetX) * this.scale - img.width / 2, (respawn.y + this.offsetY) * this.scale - img.height)
-      }
-    }
-
 
     // Draw coordinates
     if (this.displayCoordinates) {
@@ -207,9 +202,9 @@ export class IndexComponent {
     if (["P", "p"].includes(event.key)) {
       this.displayCoordinates = !this.displayCoordinates
     } else if (["S", "s"].includes(event.key)) {
-      this.displaySpawns = !this.displaySpawns
+      this.displayFlags["spawns"] = !this.displayFlags["spawns"]
     } else if (["R", "r"].includes(event.key)) {
-      this.displayRespawns = !this.displayRespawns
+      this.displayFlags["respawns"] = !this.displayFlags["respawns"]
     } else if (["&", "1"].includes(event.key)) {
       // Load crypt or variant
       if (this.selectedMap == "Crypt_01") {
