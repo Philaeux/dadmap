@@ -6,6 +6,10 @@ export const IceCave_01: Map = {
         {
             x: 1353,
             y: 811
+        },
+        {
+            x: 1723,
+            y: 1388
         }
     ],
     spawns: [

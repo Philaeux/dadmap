@@ -165,8 +165,9 @@ export class IndexComponent {
       this.offsetY += (event.clientY - this.dragStart.clientY) / this.scale * this.dragSpeed
       this.dragStart = event
     }
-
-    this.draw()
+    if (this.dragStart != null || this.displayCoordinates) {
+      this.draw()
+    }
   }
 
   endDrag() {

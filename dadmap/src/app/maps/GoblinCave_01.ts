@@ -6,6 +6,10 @@ export const GoblinCave_01: Map = {
         {
             x: 440,
             y: 600
+        },
+        {
+            x: 1002,
+            y: 365
         }
     ],
     spawns: [
