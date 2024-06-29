@@ -6,6 +6,10 @@ export const Inferno_01: Map = {
     shrine_health: [],
     shrine_health_or_respawn: [],
     shrine_respawn: [
+        {
+            x: 178,
+            y: 849
+        }
     ],
     spawn: [
         {
@@ -15,6 +19,10 @@ export const Inferno_01: Map = {
         {
             x: 925,
             y: 925
+        },
+        {
+            x: 930,
+            y: 632
         },
         {
             x: 935,

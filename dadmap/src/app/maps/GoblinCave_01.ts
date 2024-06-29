@@ -38,6 +38,10 @@ export const GoblinCave_01: Map = {
             y: 1065
         },
         {
+            x: 605,
+            y: 1195
+        },
+        {
             x: 1075,
             y: 820
         },
