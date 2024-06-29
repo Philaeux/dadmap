@@ -2,9 +2,12 @@ import { Map } from "../models"
 
 export const IceAbyss_01: Map = {
     name: "IceAbyss_01",
-    respawns: [
+    module: [],
+    shrine_health: [],
+    shrine_health_or_respawn: [],
+    shrine_respawn: [
     ],
-    spawns: [
+    spawn: [
         {
             x: 481,
             y: 930

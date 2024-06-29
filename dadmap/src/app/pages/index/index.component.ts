@@ -64,8 +64,10 @@ export class IndexComponent {
   // Flag to display cursor coordinates
   displayCoordinates: boolean = false
   displayFlags = {
-    "spawns": true,
-    "respawns": true
+    "shrine_health": true,
+    "shrine_health_or_respawn": true,
+    "shrine_respawn": true,
+    "spawn": true,
   }
 
   ngOnInit() {
@@ -118,7 +120,7 @@ export class IndexComponent {
 
     // Draw Elements
     for (const category of Object.keys(this.maps[this.selectedMap]) as (keyof Map)[]) {
-      if (category == "name") continue
+      if (category == "name" || category == "module") continue
       if (!this.displayFlags[category]) continue
 
       for (let spawn of this.maps[this.selectedMap][category]) {
@@ -203,9 +205,9 @@ export class IndexComponent {
     if (["P", "p"].includes(event.key)) {
       this.displayCoordinates = !this.displayCoordinates
     } else if (["S", "s"].includes(event.key)) {
-      this.displayFlags["spawns"] = !this.displayFlags["spawns"]
+      this.displayFlags["spawn"] = !this.displayFlags["spawn"]
     } else if (["R", "r"].includes(event.key)) {
-      this.displayFlags["respawns"] = !this.displayFlags["respawns"]
+      this.displayFlags["shrine_respawn"] = !this.displayFlags["shrine_respawn"]
     } else if (["&", "1"].includes(event.key)) {
       // Load crypt or variant
       if (this.selectedMap == "Crypt_01") {
