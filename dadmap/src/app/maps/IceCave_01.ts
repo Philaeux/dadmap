@@ -3,7 +3,12 @@ import { Map } from "../models"
 export const IceCave_01: Map = {
     name: "IceCave_01",
     module: [],
-    shrine_health: [],
+    shrine_health: [
+        {
+            x: 1352,
+            y: 1150
+        }
+    ],
     shrine_health_or_respawn: [
         {
             x: 365,
@@ -18,10 +23,6 @@ export const IceCave_01: Map = {
         {
             x: 680,
             y: 305
-        },
-        {
-            x: 1352,
-            y: 1150
         },
         {
             x: 1353,
@@ -44,6 +45,10 @@ export const IceCave_01: Map = {
         {
             x: 500,
             y: 1155
+        },
+        {
+            x: 818,
+            y: 810
         },
         {
             x: 820,

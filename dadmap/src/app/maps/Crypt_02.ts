@@ -3,7 +3,16 @@ import { Map } from "../models"
 export const Crypt_02: Map = {
     name: "Crypt_02",
     module: [],
-    shrine_health: [],
+    shrine_health: [
+        {
+            x: 265,
+            y: 266
+        },
+        {
+            x: 1795,
+            y: 1570
+        }
+    ],
     shrine_health_or_respawn: [],
     shrine_respawn: [
         {
@@ -33,6 +42,10 @@ export const Crypt_02: Map = {
         {
             x: 1354,
             y: 1798
+        },
+        {
+            x: 1360,
+            y: 1470
         },
         {
             x: 1681,
