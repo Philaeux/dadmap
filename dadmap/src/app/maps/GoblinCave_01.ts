@@ -2,8 +2,15 @@ import { Map } from "../models"
 
 export const GoblinCave_01: Map = {
     name: "GoblinCave_01",
+    herb: [],
     module: [],
+    ore: [],
+    shrine_armor: [],
     shrine_health: [
+        {
+            x: 246,
+            y: 1046
+        },
         {
             x: 275,
             y: 385,
@@ -11,13 +18,46 @@ export const GoblinCave_01: Map = {
         {
             x: 690,
             y: 1074
-        }
+        },
+        {
+            x: 690,
+            y: 1409
+        },
+        {
+            x: 1075,
+            y: 692
+        },
+        {
+            x: 1054,
+            y: 1389
+        },
+        {
+            x: 1410,
+            y: 703
+        },
+        {
+            x: 1552,
+            y: 1147
+        },
+        {
+            x: 1673,
+            y: 1497
+        },
+        {
+            x: 1792,
+            y: 1590
+        },
     ],
     shrine_health_or_respawn: [],
+    shrine_power: [],
     shrine_respawn: [
         {
             x: 440,
             y: 600
+        },
+        {
+            x: 485,
+            y: 1355
         },
         {
             x: 1002,
@@ -32,6 +72,7 @@ export const GoblinCave_01: Map = {
             y: 923
         }
     ],
+    shrine_speed: [],
     spawn: [
         {
             x: 585,

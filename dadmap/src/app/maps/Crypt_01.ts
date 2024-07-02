@@ -2,18 +2,34 @@ import { Map } from "../models"
 
 export const Crypt_01: Map = {
     name: "Crypt_01",
+    herb: [],
     module: [],
+    ore: [],
+    shrine_armor: [],
     shrine_health: [
         {
             x: 300,
             y: 1355
+        },
+        { // Check this one
+            x: 340,
+            y: 852
+        },
+        {
+            x: 1142,
+            y: 580
         }
     ],
     shrine_health_or_respawn: [],
+    shrine_power: [],
     shrine_respawn: [
         {
             x: 280,
             y: 239
+        },
+        {
+            x: 745,
+            y: 1140
         },
         {
             x: 813,
@@ -24,6 +40,7 @@ export const Crypt_01: Map = {
             y: 990
         }
     ],
+    shrine_speed: [],
     spawn: [
         {
             x: 226,

@@ -1,4 +1,5 @@
 import { Component, ElementRef, HostListener, ViewChild } from '@angular/core'
+import { ClipboardModule, Clipboard } from '@angular/cdk/clipboard'
 
 import { CommonModule } from '@angular/common'
 import { Map, MapInfo } from '../../models'
@@ -14,7 +15,7 @@ import { Inferno_02 } from '../../maps/Inferno_02'
 @Component({
   selector: 'app-index',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ClipboardModule],
   templateUrl: './index.component.html',
   styleUrl: './index.component.scss'
 })
@@ -70,6 +71,8 @@ export class IndexComponent {
     "spawn": true,
   }
 
+  constructor(private clipboard: Clipboard) { }
+
   ngOnInit() {
     this.context = this.canvas!.nativeElement.getContext('2d')!
 
@@ -120,7 +123,7 @@ export class IndexComponent {
 
     // Draw Elements
     for (const category of Object.keys(this.maps[this.selectedMap]) as (keyof Map)[]) {
-      if (category == "name" || category == "module") continue
+      if (category == "name" || category == "module" || category == "shrine_armor" || category == "shrine_power" || category == "shrine_speed" || category == "herb" || category == "ore") continue
       if (!this.displayFlags[category]) continue
 
       for (let spawn of this.maps[this.selectedMap][category]) {
@@ -153,6 +156,12 @@ export class IndexComponent {
 
   startDrag(event: MouseEvent) {
     this.dragStart = event
+    if (event.button == 1) {
+      let realX = this.mouseX / this.scale - this.offsetX
+      let realY = this.mouseY / this.scale - this.offsetY
+
+      this.clipboard.copy(`{ x: ${realX.toFixed(0)},\n y: ${realY.toFixed(0)} },`)
+    }
   }
 
   onMouseMove(event: MouseEvent) {
