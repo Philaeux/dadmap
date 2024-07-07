@@ -67,9 +67,10 @@ export class IndexComponent {
   displayFlags = {
     "herb": false,
     "ore": false,
-    "shrine_armor": false,
+    "shrine_defense": false,
     "shrine_health": true,
     "shrine_health_or_respawn": true,
+    "shrine_health_or_speed": true,
     "shrine_power": false,
     "shrine_respawn": true,
     "shrine_speed": false,
@@ -226,6 +227,10 @@ export class IndexComponent {
     } else if (["H", "h"].includes(event.key)) {
       this.displayFlags["shrine_health"] = !this.displayFlags["shrine_health"]
       this.displayFlags["shrine_health_or_respawn"] = this.displayFlags["shrine_respawn"] || this.displayFlags["shrine_health"]
+      this.displayFlags["shrine_health_or_speed"] = this.displayFlags["shrine_speed"] || this.displayFlags["shrine_health"]
+    } else if (["E", "e"].includes(event.key)) {
+      this.displayFlags["shrine_speed"] = !this.displayFlags["shrine_speed"]
+      this.displayFlags["shrine_health_or_speed"] = this.displayFlags["shrine_speed"] || this.displayFlags["shrine_health"]
     } else if (["&", "1"].includes(event.key)) {
       // Load crypt or variant
       if (this.selectedMap == "Crypt_01") {
