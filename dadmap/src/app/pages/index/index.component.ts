@@ -3,13 +3,13 @@ import { ClipboardModule, Clipboard } from '@angular/cdk/clipboard'
 
 import { CommonModule } from '@angular/common'
 import { Map, MapInfo } from '../../models'
-import { Crypt_01 } from '../../maps/Crypt_01'
-import { Crypt_02 } from '../../maps/Crypt_02'
-import { GoblinCave_01 } from '../../maps/GoblinCave_01'
-import { IceAbyss_01 } from '../../maps/IceAbyss_01'
-import { IceCave_01 } from '../../maps/IceCave_01'
-import { Inferno_01 } from '../../maps/Inferno_01'
-import { Inferno_02 } from '../../maps/Inferno_02'
+import Crypt_01 from '../../maps/Crypt_01.json'
+import Crypt_02 from '../../maps/Crypt_02.json'
+import GoblinCave_01 from '../../maps/GoblinCave_01.json'
+import IceAbyss_01 from '../../maps/IceAbyss_01.json'
+import IceCave_01 from '../../maps/IceCave_01.json'
+import Inferno_01 from '../../maps/Inferno_01.json'
+import Inferno_02 from '../../maps/Inferno_02.json'
 
 
 @Component({
@@ -26,7 +26,7 @@ export class IndexComponent {
   // Context to run draw commands
   context: CanvasRenderingContext2D | null = null;
   // Offset of the draw on the X
-  offsetX: number = 960;
+  offsetX: number = 660;
   // Offset of the draw on the Y
   offsetY: number = -20;
   // Background color to apply on the context
@@ -65,9 +65,14 @@ export class IndexComponent {
   // Flag to display cursor coordinates
   displayCoordinates: boolean = false
   displayFlags = {
+    "herb": false,
+    "ore": false,
+    "shrine_armor": false,
     "shrine_health": true,
     "shrine_health_or_respawn": true,
+    "shrine_power": false,
     "shrine_respawn": true,
+    "shrine_speed": false,
     "spawn": true,
   }
 
@@ -123,7 +128,7 @@ export class IndexComponent {
 
     // Draw Elements
     for (const category of Object.keys(this.maps[this.selectedMap]) as (keyof Map)[]) {
-      if (category == "name" || category == "module" || category == "shrine_armor" || category == "shrine_power" || category == "shrine_speed" || category == "herb" || category == "ore") continue
+      if (category == "name" || category == "module") continue
       if (!this.displayFlags[category]) continue
 
       for (let spawn of this.maps[this.selectedMap][category]) {
@@ -160,7 +165,7 @@ export class IndexComponent {
       let realX = this.mouseX / this.scale - this.offsetX
       let realY = this.mouseY / this.scale - this.offsetY
 
-      this.clipboard.copy(`{ x: ${realX.toFixed(0)},\n y: ${realY.toFixed(0)} },`)
+      this.clipboard.copy(`{ "x": ${realX.toFixed(0)},\n "y": ${realY.toFixed(0)} },`)
     }
   }
 
@@ -217,6 +222,10 @@ export class IndexComponent {
       this.displayFlags["spawn"] = !this.displayFlags["spawn"]
     } else if (["R", "r"].includes(event.key)) {
       this.displayFlags["shrine_respawn"] = !this.displayFlags["shrine_respawn"]
+      this.displayFlags["shrine_health_or_respawn"] = this.displayFlags["shrine_respawn"] || this.displayFlags["shrine_health"]
+    } else if (["H", "h"].includes(event.key)) {
+      this.displayFlags["shrine_health"] = !this.displayFlags["shrine_health"]
+      this.displayFlags["shrine_health_or_respawn"] = this.displayFlags["shrine_respawn"] || this.displayFlags["shrine_health"]
     } else if (["&", "1"].includes(event.key)) {
       // Load crypt or variant
       if (this.selectedMap == "Crypt_01") {
@@ -224,7 +233,7 @@ export class IndexComponent {
       } else {
         this.selectedMap = "Crypt_01"
       }
-      this.offsetX = 960
+      this.offsetX = 660
       this.offsetY = -20
       this.scale = 0.45
     } else if (["é", "2"].includes(event.key)) {
@@ -234,25 +243,25 @@ export class IndexComponent {
       } else {
         this.selectedMap = "Inferno_01"
       }
-      this.offsetX = 600
+      this.offsetX = 430
       this.offsetY = 50
       this.scale = 0.8
     } else if (["\"", "3"].includes(event.key)) {
       // Load goblin
       this.selectedMap = "GoblinCave_01"
-      this.offsetX = 960
+      this.offsetX = 660
       this.offsetY = -20
       this.scale = 0.45
     } else if (["(", "5"].includes(event.key)) {
       // Load ice
       this.selectedMap = "IceCave_01"
-      this.offsetX = 960
+      this.offsetX = 660
       this.offsetY = -20
       this.scale = 0.45
     } else if (["-", "6"].includes(event.key)) {
       // Load Abyss
       this.selectedMap = "IceAbyss_01"
-      this.offsetX = 600
+      this.offsetX = 430
       this.offsetY = 50
       this.scale = 0.8
     }
