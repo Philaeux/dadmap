@@ -217,7 +217,7 @@ export class IndexComponent {
 
   @HostListener('window:keydown', ['$event'])
   onKeyDown(event: KeyboardEvent) {
-    if (["P", "p"].includes(event.key)) {
+    if (["C", "c"].includes(event.key)) {
       this.displayCoordinates = !this.displayCoordinates
     } else if (["S", "s"].includes(event.key)) {
       this.displayFlags["spawn"] = !this.displayFlags["spawn"]
@@ -228,7 +228,7 @@ export class IndexComponent {
       this.displayFlags["shrine_health"] = !this.displayFlags["shrine_health"]
       this.displayFlags["shrine_health_or_respawn"] = this.displayFlags["shrine_respawn"] || this.displayFlags["shrine_health"]
       this.displayFlags["shrine_health_or_speed"] = this.displayFlags["shrine_speed"] || this.displayFlags["shrine_health"]
-    } else if (["E", "e"].includes(event.key)) {
+    } else if (["P", "p"].includes(event.key)) {
       this.displayFlags["shrine_speed"] = !this.displayFlags["shrine_speed"]
       this.displayFlags["shrine_health_or_speed"] = this.displayFlags["shrine_speed"] || this.displayFlags["shrine_health"]
     } else if (["&", "1"].includes(event.key)) {
