@@ -67,11 +67,15 @@ export class IndexComponent {
   displayFlags = {
     "herb": false,
     "ore": false,
+    "shrine_buff": false,
     "shrine_defense": false,
+    "shrine_defense_or_power": false,
+    "shrine_defense_or_speed": false,
     "shrine_health": true,
     "shrine_health_or_respawn": true,
     "shrine_health_or_speed": true,
     "shrine_power": false,
+    "shrine_power_or_speed": false,
     "shrine_respawn": true,
     "shrine_speed": false,
     "spawn": true,
@@ -228,8 +232,14 @@ export class IndexComponent {
       this.displayFlags["shrine_health"] = !this.displayFlags["shrine_health"]
       this.displayFlags["shrine_health_or_respawn"] = this.displayFlags["shrine_respawn"] || this.displayFlags["shrine_health"]
       this.displayFlags["shrine_health_or_speed"] = this.displayFlags["shrine_speed"] || this.displayFlags["shrine_health"]
-    } else if (["P", "p"].includes(event.key)) {
+    } else if (["B", "b"].includes(event.key)) {
+      this.displayFlags["shrine_buff"] = !this.displayFlags["shrine_buff"]
       this.displayFlags["shrine_speed"] = !this.displayFlags["shrine_speed"]
+      this.displayFlags["shrine_defense"] = !this.displayFlags["shrine_defense"]
+      this.displayFlags["shrine_defense_or_power"] = !this.displayFlags["shrine_defense_or_power"]
+      this.displayFlags["shrine_defense_or_speed"] = !this.displayFlags["shrine_defense_or_speed"]
+      this.displayFlags["shrine_power"] = !this.displayFlags["shrine_power"]
+      this.displayFlags["shrine_power_or_speed"] = !this.displayFlags["shrine_power_or_speed"]
       this.displayFlags["shrine_health_or_speed"] = this.displayFlags["shrine_speed"] || this.displayFlags["shrine_health"]
     } else if (["&", "1"].includes(event.key)) {
       // Load crypt or variant

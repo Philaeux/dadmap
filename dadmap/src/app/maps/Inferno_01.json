@@ -3,7 +3,19 @@
     "herb": [],
     "module": [],
     "ore": [],
-    "shrine_defense": [],
+    "shrine_buff": [],
+    "shrine_defense": [
+        {
+            "x": 259,
+            "y": 261
+        },
+        {
+            "x": 701,
+            "y": 409
+        }
+    ],
+    "shrine_defense_or_power": [],
+    "shrine_defense_or_speed": [],
     "shrine_health": [
         {
             "x": 110,
@@ -29,7 +41,13 @@
         }
     ],
     "shrine_health_or_speed": [],
-    "shrine_power": [],
+    "shrine_power": [
+        {
+            "x": 913,
+            "y": 407
+        }
+    ],
+    "shrine_power_or_speed": [],
     "shrine_respawn": [
         {
             "x": 178,
