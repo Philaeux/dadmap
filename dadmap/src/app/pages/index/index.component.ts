@@ -13,11 +13,10 @@ import Inferno_02 from '../../maps/Inferno_02.json'
 
 
 @Component({
-  selector: 'app-index',
-  standalone: true,
-  imports: [CommonModule, ClipboardModule],
-  templateUrl: './index.component.html',
-  styleUrl: './index.component.scss'
+    selector: 'app-index',
+    imports: [CommonModule, ClipboardModule],
+    templateUrl: './index.component.html',
+    styleUrl: './index.component.scss'
 })
 export class IndexComponent {
 
